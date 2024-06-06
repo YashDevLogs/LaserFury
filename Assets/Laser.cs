@@ -1,6 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 [RequireComponent(typeof(LineRenderer))]
 public class Laser : MonoBehaviour
@@ -8,7 +8,7 @@ public class Laser : MonoBehaviour
     public Transform LaserSpawn;
     public float LaserRange = 50f;
     public float RotationSpeed = 100f;
-    public float RotationRange = 45f; // Half of the full range for right and left rotation
+    public float RotationRange = 45f;
 
     private LineRenderer laserLine;
     private Quaternion initialRotation;
@@ -17,6 +17,11 @@ public class Laser : MonoBehaviour
     private bool returningToInitial = false;
     private float currentRotationAngle = 0f;
 
+    public event Action OnLaserCompleted;
+    public event Action OnPlayerHit;
+
+    private Coroutine laserCoroutine;
+
     private void Awake()
     {
         laserLine = GetComponent<LineRenderer>();
@@ -24,11 +29,23 @@ public class Laser : MonoBehaviour
         initialRotation = transform.rotation;
     }
 
-    private void Update()
+    public void InitializeLaser(float rotationSpeed, float rotationRange)
     {
-        if (Input.GetMouseButtonDown(0))
+        RotationSpeed = rotationSpeed;
+        RotationRange = rotationRange;
+    }
+
+    public void StartLaser()
+    {
+        laserCoroutine = StartCoroutine(ShootLaser());
+    }
+
+    public void StopLaser()
+    {
+        if (laserCoroutine != null)
         {
-            StartCoroutine(ShootLaser());
+            StopCoroutine(laserCoroutine);
+            laserLine.enabled = false;
         }
     }
 
@@ -38,7 +55,6 @@ public class Laser : MonoBehaviour
 
         while (true)
         {
-            // Rotate the laser GameObject right
             if (rotatingRight)
             {
                 float rotationStep = RotationSpeed * Time.deltaTime;
@@ -51,7 +67,6 @@ public class Laser : MonoBehaviour
                     rotatingLeft = true;
                 }
             }
-            // Rotate the laser GameObject left
             else if (rotatingLeft)
             {
                 float rotationStep = RotationSpeed * Time.deltaTime;
@@ -64,7 +79,6 @@ public class Laser : MonoBehaviour
                     returningToInitial = true;
                 }
             }
-            // Return to initial position
             else if (returningToInitial)
             {
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, initialRotation, RotationSpeed * Time.deltaTime);
@@ -74,7 +88,8 @@ public class Laser : MonoBehaviour
                 {
                     transform.rotation = initialRotation;
                     laserLine.enabled = false;
-                    yield break; // Stop the coroutine
+                    OnLaserCompleted?.Invoke();
+                    yield break;
                 }
             }
 
@@ -87,8 +102,9 @@ public class Laser : MonoBehaviour
 
                 if (hit.collider.CompareTag("Player"))
                 {
-                    Destroy(hit.collider.gameObject); // Destroy the player
-                    // GameManager.instance.GameOver(); // Handle game over
+                    Destroy(hit.collider.gameObject);
+                    OnPlayerHit?.Invoke();
+                    yield break;
                 }
             }
             else
