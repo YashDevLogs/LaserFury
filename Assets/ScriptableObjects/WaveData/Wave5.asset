@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c74e6dcb6b390a149b3800055b276299, type: 3}
+  m_Name: Wave5
+  m_EditorClassIdentifier: 
+  numberOfLasers: 5
+  rotationSpeed: 10
+  rotationRange: 45
+  spawnPositions:
+  - {x: -0.139, y: 1.206, z: 11.52}
+  - {x: 11.3, y: 1.222, z: 1.03}
+  - {x: -12.69, y: 1.15, z: 2.3}
+  - {x: -8.33, y: 1.21, z: -10.52}
+  - {x: 6, y: 1.21, z: -10.64}
+  initialRotations:
+  - {x: 0.6620018, y: 185.35025, z: 0.4079962}
+  - {x: 0.6620015, y: 266.85022, z: 0.40799552}
+  - {x: 0.6620011, y: 105.16002, z: 0.4079948}
+  - {x: 0.66232353, y: 40.191525, z: 0.40769866}
+  - {x: 0.6623246, y: 328.46454, z: 0.40769878}

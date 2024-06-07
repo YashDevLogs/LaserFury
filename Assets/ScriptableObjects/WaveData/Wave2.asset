@@ -12,14 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c74e6dcb6b390a149b3800055b276299, type: 3}
   m_Name: Wave2
   m_EditorClassIdentifier: 
-  numberOfLasers: 3
+  numberOfLasers: 2
   rotationSpeed: 10
   rotationRange: 45
   spawnPositions:
-  - {x: -0.53, y: 0.97, z: 13.42}
-  - {x: -0.454, y: 1.284, z: -15.131}
-  - {x: 13.73, y: 0.97, z: -0.7}
+  - {x: -0.139, y: 1.206, z: 11.52}
+  - {x: 6, y: 1.21, z: -10.64}
   initialRotations:
-  - {x: 0.66200143, y: 180, z: 0.40799618}
-  - {x: 0.6623239, y: 1.0022409, z: 0.40769866}
-  - {x: 0.6620016, y: 269.00922, z: 0.40799582}
+  - {x: 0.6620018, y: 185.35025, z: 0.4079962}
+  - {x: 0.6623246, y: 328.46454, z: 0.40769878}
