@@ -104,6 +104,7 @@ public class Laser : MonoBehaviour
                 {
                     Destroy(hit.collider.gameObject);
                     OnPlayerHit?.Invoke();
+
                     yield break;
                 }
             }

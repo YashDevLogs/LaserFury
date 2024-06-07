@@ -126,10 +126,7 @@ public class GameManager : MonoBehaviour
             Debug.Log("Game Over!");
             gameOverScreen.SetActive(true);
             StopAllCoroutines();
-            foreach (Laser laser in FindObjectsOfType<Laser>())
-            {
-                laser.StopLaser();
-            }
+            Time.timeScale = 0;
         }
     }
 
@@ -140,6 +137,8 @@ public class GameManager : MonoBehaviour
         currentWaveIndex = 0;
         gameOverScreen.SetActive(false);
         gameWonScreen.SetActive(false);
+
+        Time.timeScale = 1;
 
         // Destroy all existing lasers before restarting
         foreach (Laser laser in FindObjectsOfType<Laser>())

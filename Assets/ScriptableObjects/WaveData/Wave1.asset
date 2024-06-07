@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Wave1
   m_EditorClassIdentifier: 
   numberOfLasers: 1
-  rotationSpeed: 20
+  rotationSpeed: 10
   rotationRange: 45
   spawnPositions:
   - {x: -0.139, y: 1.206, z: 11.52}
