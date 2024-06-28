@@ -1,7 +1,6 @@
+using UnityEngine;
 using System.Collections;
 using TMPro;
-using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
@@ -11,34 +10,62 @@ public class GameManager : MonoBehaviour
     public Transform playerSpawnPoint;
     public GameObject laserPrefab;
     public TextMeshProUGUI waveText;
+    public TextMeshProUGUI nextWaveText;
     public TextMeshProUGUI countdownText;
     public GameObject gameOverScreen;
     public GameObject gameWonScreen;
 
-    private Transform player;
+    [SerializeField] private Player player;
     private int currentWaveIndex = 0;
-    private int lasersCompleted = 0;
     private bool gameEnded = false;
+    private float waveDuration = 10f;  // Each wave lasts for 10 seconds
+
+    public Transform[] powerUpSpawnPoints;
+    public float powerUpSpawnInterval = 10f;
+
+  
 
     private void Start()
     {
         gameOverScreen.SetActive(false);
         gameWonScreen.SetActive(false);
 
-        StartWave();
+        waveText.text = "Wave 1";
+        waveText.gameObject.SetActive(true);
+        StartCoroutine(StartWaveWithCountdown(3));
+        StartCoroutine(SpawnPowerUps());
+
+        player.OnPlayerDeath += GameOver;
+    }
+
+    private void OnDisable()
+    {
+        player.OnPlayerDeath -= GameOver;
+    }
+
+    private IEnumerator SpawnPowerUps()
+    {
+        while (!gameEnded)
+        {
+            yield return new WaitForSeconds(powerUpSpawnInterval);
+
+            string[] powerUpTypes = { "Shield", "SlowDown", "LaserProtectionGear" };
+            string randomPowerUp = powerUpTypes[Random.Range(0, powerUpTypes.Length)];
+            Transform spawnPoint = powerUpSpawnPoints[Random.Range(0, powerUpSpawnPoints.Length)];
+
+            Instantiate(PowerUpFactory.CreatePowerUp(randomPowerUp), spawnPoint.position, Quaternion.identity);
+        }
     }
 
     private void StartWave()
     {
         if (currentWaveIndex >= waves.Length)
         {
-            // Player wins the game
             gameWonScreen.SetActive(true);
             return;
         }
 
         WaveData_SO currentWave = waves[currentWaveIndex];
-        lasersCompleted = 0;
 
         for (int i = 0; i < currentWave.numberOfLasers; i++)
         {
@@ -46,16 +73,18 @@ public class GameManager : MonoBehaviour
             Quaternion initialRotation = Quaternion.Euler(currentWave.initialRotations[i]);
             GameObject laserObj = Instantiate(laserPrefab, spawnPosition, initialRotation);
             Laser laser = laserObj.GetComponent<Laser>();
-            laser.OnLaserCompleted += OnLaserCompleted;
-            laser.OnPlayerHit += GameOver; // Subscribe to the player hit event
             laser.InitializeLaser(currentWave.rotationSpeed, currentWave.rotationRange);
+            laser.StartLaser();
         }
 
-        StartCoroutine(StartWaveWithCountdown(3));
+        StartCoroutine(WaveTimer());
     }
 
     private IEnumerator StartWaveWithCountdown(int countdown)
     {
+        waveText.text = "Wave " + (currentWaveIndex + 1);
+        waveText.gameObject.SetActive(true);
+
         countdownText.gameObject.SetActive(true);
         for (int i = countdown; i > 0; i--)
         {
@@ -65,60 +94,53 @@ public class GameManager : MonoBehaviour
         countdownText.text = "Start!";
         yield return new WaitForSeconds(1f);
         countdownText.gameObject.SetActive(false);
+        waveText.gameObject.SetActive(false);
 
-        // Start lasers
-        foreach (Laser laser in FindObjectsOfType<Laser>())
-        {
-            laser.StartLaser();
-        }
+        StartWave();
     }
 
-    private void OnLaserCompleted()
+    private IEnumerator WaveTimer()
     {
-        lasersCompleted++;
-        if (lasersCompleted >= waves[currentWaveIndex].numberOfLasers)
-        {
-            StartCoroutine(HandleWaveCompletion());
-        }
+        yield return new WaitForSeconds(waveDuration);
+        OnWaveCompleted();
     }
 
-    private IEnumerator HandleWaveCompletion()
+    private void OnWaveCompleted()
     {
         waveText.text = "Wave " + (currentWaveIndex + 1) + " Completed!";
         waveText.gameObject.SetActive(true);
 
-        yield return new WaitForSeconds(2f);
-
-        waveText.gameObject.SetActive(false);
-
         foreach (Laser laser in FindObjectsOfType<Laser>())
         {
+            laser.StopLaser();
             Destroy(laser.gameObject);
         }
 
-        waveText.text = "Wave " + (currentWaveIndex + 2);
-        waveText.gameObject.SetActive(true);
-
-        // Wait for a few seconds
-        yield return new WaitForSeconds(2f);
-
-        // Hide wave completion UI
-        waveText.gameObject.SetActive(false);
-
-        // Move to the next wave
         currentWaveIndex++;
-        StartWave();
+        nextWaveText.text = "Next Wave: " + (currentWaveIndex + 1);
+        nextWaveText.gameObject.SetActive(true);
+
+        StartCoroutine(HandleWaveCompletion());
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private IEnumerator HandleWaveCompletion()
     {
-        if (collision.gameObject.CompareTag("Player") && !gameEnded)
+        yield return new WaitForSeconds(2f);
+
+        waveText.gameObject.SetActive(false);
+        nextWaveText.gameObject.SetActive(false);
+
+        if (currentWaveIndex < waves.Length)
         {
-            GameOver();
+            StartCoroutine(StartWaveWithCountdown(3));
+        }
+        else
+        {
+            gameWonScreen.SetActive(true);
         }
     }
 
-    private void GameOver()
+    public void GameOver()
     {
         if (!gameEnded)
         {
@@ -146,15 +168,13 @@ public class GameManager : MonoBehaviour
             Destroy(laser.gameObject);
         }
 
-        // Destroy existing player instance
-        if (player != null)
-        {
-            Destroy(player.gameObject);
-        }
+        Destroy(player.gameObject);
 
         // Respawn the player
-        player = Instantiate(playerPrefab, playerSpawnPoint.position, playerSpawnPoint.rotation);
+        player = Instantiate(playerPrefab, playerSpawnPoint.position, playerSpawnPoint.rotation).GetComponent<Player>();
+        player.OnPlayerDeath += GameOver;
 
-        StartWave();
+        StartCoroutine(StartWaveWithCountdown(3));
+        StartCoroutine(SpawnPowerUps());
     }
 }

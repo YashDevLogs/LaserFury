@@ -1,0 +1,195 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.SoloGameDev.Saasaki"
+4    android:installLocation="preferExternal"
+5    android:versionCode="1"
+6    android:versionName="1.0.2" >
+7
+8    <uses-sdk
+9        android:minSdkVersion="25"
+9-->C:\Users\13aug\OneDrive\Desktop\Create WIth Yash\Projects\Saasaki\Exportyy\launcher\src\main\AndroidManifest.xml
+10        android:targetSdkVersion="34" />
+10-->C:\Users\13aug\OneDrive\Desktop\Create WIth Yash\Projects\Saasaki\Exportyy\launcher\src\main\AndroidManifest.xml
+11
+12    <supports-screens
+12-->C:\Users\13aug\OneDrive\Desktop\Create WIth Yash\Projects\Saasaki\Exportyy\launcher\src\main\AndroidManifest.xml:4:3-163
+13        android:anyDensity="true"
+13-->C:\Users\13aug\OneDrive\Desktop\Create WIth Yash\Projects\Saasaki\Exportyy\launcher\src\main\AndroidManifest.xml:4:135-160
+14        android:largeScreens="true"
+14-->C:\Users\13aug\OneDrive\Desktop\Create WIth Yash\Projects\Saasaki\Exportyy\launcher\src\main\AndroidManifest.xml:4:78-105
+15        android:normalScreens="true"
+15-->C:\Users\13aug\OneDrive\Desktop\Create WIth Yash\Projects\Saasaki\Exportyy\launcher\src\main\AndroidManifest.xml:4:49-77
+16        android:smallScreens="true"
+16-->C:\Users\13aug\OneDrive\Desktop\Create WIth Yash\Projects\Saasaki\Exportyy\launcher\src\main\AndroidManifest.xml:4:21-48
+17        android:xlargeScreens="true" />
+17-->C:\Users\13aug\OneDrive\Desktop\Create WIth Yash\Projects\Saasaki\Exportyy\launcher\src\main\AndroidManifest.xml:4:106-134
+18
+19    <uses-permission android:name="android.permission.INTERNET" />
+19-->[:unityLibrary] C:\Users\13aug\OneDrive\Desktop\Create WIth Yash\Projects\Saasaki\Exportyy\unityLibrary\build\intermediates\merged_manifest\debug\AndroidManifest.xml:10:5-67
+19-->[:unityLibrary] C:\Users\13aug\OneDrive\Desktop\Create WIth Yash\Projects\Saasaki\Exportyy\unityLibrary\build\intermediates\merged_manifest\debug\AndroidManifest.xml:10:22-64
+20
+21    <uses-feature android:glEsVersion="0x00030000" />
+21-->[:unityLibrary] C:\Users\13aug\OneDrive\Desktop\Create WIth Yash\Projects\Saasaki\Exportyy\unityLibrary\build\intermediates\merged_manifest\debug\AndroidManifest.xml:12:5-54
+21-->[:unityLibrary] C:\Users\13aug\OneDrive\Desktop\Create WIth Yash\Projects\Saasaki\Exportyy\unityLibrary\build\intermediates\merged_manifest\debug\AndroidManifest.xml:12:19-51
+22    <uses-feature
+22-->[:unityLibrary] C:\Users\13aug\OneDrive\Desktop\Create WIth Yash\Projects\Saasaki\Exportyy\unityLibrary\build\intermediates\merged_manifest\debug\AndroidManifest.xml:13:5-15:36
+23        android:name="android.hardware.vulkan.version"
+23-->[:unityLibrary] C:\Users\13aug\OneDrive\Desktop\Create WIth Yash\Projects\Saasaki\Exportyy\unityLibrary\build\intermediates\merged_manifest\debug\AndroidManifest.xml:14:9-55
+24        android:required="false" />
+24-->[:unityLibrary] C:\Users\13aug\OneDrive\Desktop\Create WIth Yash\Projects\Saasaki\Exportyy\unityLibrary\build\intermediates\merged_manifest\debug\AndroidManifest.xml:15:9-33
+25    <uses-feature
+25-->[:unityLibrary] C:\Users\13aug\OneDrive\Desktop\Create WIth Yash\Projects\Saasaki\Exportyy\unityLibrary\build\intermediates\merged_manifest\debug\AndroidManifest.xml:16:5-18:36
+26        android:name="android.hardware.touchscreen"
+26-->[:unityLibrary] C:\Users\13aug\OneDrive\Desktop\Create WIth Yash\Projects\Saasaki\Exportyy\unityLibrary\build\intermediates\merged_manifest\debug\AndroidManifest.xml:17:9-52
+27        android:required="false" />
+27-->[:unityLibrary] C:\Users\13aug\OneDrive\Desktop\Create WIth Yash\Projects\Saasaki\Exportyy\unityLibrary\build\intermediates\merged_manifest\debug\AndroidManifest.xml:18:9-33
+28    <uses-feature
+28-->[:unityLibrary] C:\Users\13aug\OneDrive\Desktop\Create WIth Yash\Projects\Saasaki\Exportyy\unityLibrary\build\intermediates\merged_manifest\debug\AndroidManifest.xml:19:5-21:36
+29        android:name="android.hardware.touchscreen.multitouch"
+29-->[:unityLibrary] C:\Users\13aug\OneDrive\Desktop\Create WIth Yash\Projects\Saasaki\Exportyy\unityLibrary\build\intermediates\merged_manifest\debug\AndroidManifest.xml:20:9-63
+30        android:required="false" />
+30-->[:unityLibrary] C:\Users\13aug\OneDrive\Desktop\Create WIth Yash\Projects\Saasaki\Exportyy\unityLibrary\build\intermediates\merged_manifest\debug\AndroidManifest.xml:21:9-33
+31    <uses-feature
+31-->[:unityLibrary] C:\Users\13aug\OneDrive\Desktop\Create WIth Yash\Projects\Saasaki\Exportyy\unityLibrary\build\intermediates\merged_manifest\debug\AndroidManifest.xml:22:5-24:36
+32        android:name="android.hardware.touchscreen.multitouch.distinct"
+32-->[:unityLibrary] C:\Users\13aug\OneDrive\Desktop\Create WIth Yash\Projects\Saasaki\Exportyy\unityLibrary\build\intermediates\merged_manifest\debug\AndroidManifest.xml:23:9-72
+33        android:required="false" />
+33-->[:unityLibrary] C:\Users\13aug\OneDrive\Desktop\Create WIth Yash\Projects\Saasaki\Exportyy\unityLibrary\build\intermediates\merged_manifest\debug\AndroidManifest.xml:24:9-33
+34
+35    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+35-->[:unityLibrary:mobilenotifications.androidlib] C:\Users\13aug\OneDrive\Desktop\Create WIth Yash\Projects\Saasaki\Exportyy\unityLibrary\mobilenotifications.androidlib\build\intermediates\merged_manifest\debug\AndroidManifest.xml:9:5-77
+35-->[:unityLibrary:mobilenotifications.androidlib] C:\Users\13aug\OneDrive\Desktop\Create WIth Yash\Projects\Saasaki\Exportyy\unityLibrary\mobilenotifications.androidlib\build\intermediates\merged_manifest\debug\AndroidManifest.xml:9:22-74
+36    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+36-->[:unityLibrary:mobilenotifications.androidlib] C:\Users\13aug\OneDrive\Desktop\Create WIth Yash\Projects\Saasaki\Exportyy\unityLibrary\mobilenotifications.androidlib\build\intermediates\merged_manifest\debug\AndroidManifest.xml:10:5-81
+36-->[:unityLibrary:mobilenotifications.androidlib] C:\Users\13aug\OneDrive\Desktop\Create WIth Yash\Projects\Saasaki\Exportyy\unityLibrary\mobilenotifications.androidlib\build\intermediates\merged_manifest\debug\AndroidManifest.xml:10:22-78
+37    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+37-->[:unityLibrary:mobilenotifications.androidlib] C:\Users\13aug\OneDrive\Desktop\Create WIth Yash\Projects\Saasaki\Exportyy\unityLibrary\mobilenotifications.androidlib\build\intermediates\merged_manifest\debug\AndroidManifest.xml:11:5-79
+37-->[:unityLibrary:mobilenotifications.androidlib] C:\Users\13aug\OneDrive\Desktop\Create WIth Yash\Projects\Saasaki\Exportyy\unityLibrary\mobilenotifications.androidlib\build\intermediates\merged_manifest\debug\AndroidManifest.xml:11:22-76
+38
+39    <application
+39-->C:\Users\13aug\OneDrive\Desktop\Create WIth Yash\Projects\Saasaki\Exportyy\launcher\src\main\AndroidManifest.xml:3:3-83
+40        android:debuggable="true"
+41        android:extractNativeLibs="true"
+41-->[:unityLibrary] C:\Users\13aug\OneDrive\Desktop\Create WIth Yash\Projects\Saasaki\Exportyy\unityLibrary\build\intermediates\merged_manifest\debug\AndroidManifest.xml:26:18-50
+42        android:icon="@mipmap/app_icon"
+42-->C:\Users\13aug\OneDrive\Desktop\Create WIth Yash\Projects\Saasaki\Exportyy\launcher\src\main\AndroidManifest.xml:3:49-80
+43        android:label="@string/app_name"
+43-->C:\Users\13aug\OneDrive\Desktop\Create WIth Yash\Projects\Saasaki\Exportyy\launcher\src\main\AndroidManifest.xml:3:16-48
+44        android:testOnly="true" >
+45        <meta-data
+45-->[:unityLibrary] C:\Users\13aug\OneDrive\Desktop\Create WIth Yash\Projects\Saasaki\Exportyy\unityLibrary\build\intermediates\merged_manifest\debug\AndroidManifest.xml:27:9-29:33
+46            android:name="unity.splash-mode"
+46-->[:unityLibrary] C:\Users\13aug\OneDrive\Desktop\Create WIth Yash\Projects\Saasaki\Exportyy\unityLibrary\build\intermediates\merged_manifest\debug\AndroidManifest.xml:28:13-45
+47            android:value="0" />
+47-->[:unityLibrary] C:\Users\13aug\OneDrive\Desktop\Create WIth Yash\Projects\Saasaki\Exportyy\unityLibrary\build\intermediates\merged_manifest\debug\AndroidManifest.xml:29:13-30
+48        <meta-data
+48-->[:unityLibrary] C:\Users\13aug\OneDrive\Desktop\Create WIth Yash\Projects\Saasaki\Exportyy\unityLibrary\build\intermediates\merged_manifest\debug\AndroidManifest.xml:30:9-32:36
+49            android:name="unity.splash-enable"
+49-->[:unityLibrary] C:\Users\13aug\OneDrive\Desktop\Create WIth Yash\Projects\Saasaki\Exportyy\unityLibrary\build\intermediates\merged_manifest\debug\AndroidManifest.xml:31:13-47
+50            android:value="True" />
+50-->[:unityLibrary] C:\Users\13aug\OneDrive\Desktop\Create WIth Yash\Projects\Saasaki\Exportyy\unityLibrary\build\intermediates\merged_manifest\debug\AndroidManifest.xml:32:13-33
+51        <meta-data
+51-->[:unityLibrary] C:\Users\13aug\OneDrive\Desktop\Create WIth Yash\Projects\Saasaki\Exportyy\unityLibrary\build\intermediates\merged_manifest\debug\AndroidManifest.xml:33:9-35:36
+52            android:name="unity.launch-fullscreen"
+52-->[:unityLibrary] C:\Users\13aug\OneDrive\Desktop\Create WIth Yash\Projects\Saasaki\Exportyy\unityLibrary\build\intermediates\merged_manifest\debug\AndroidManifest.xml:34:13-51
+53            android:value="True" />
+53-->[:unityLibrary] C:\Users\13aug\OneDrive\Desktop\Create WIth Yash\Projects\Saasaki\Exportyy\unityLibrary\build\intermediates\merged_manifest\debug\AndroidManifest.xml:35:13-33
+54        <meta-data
+54-->[:unityLibrary] C:\Users\13aug\OneDrive\Desktop\Create WIth Yash\Projects\Saasaki\Exportyy\unityLibrary\build\intermediates\merged_manifest\debug\AndroidManifest.xml:36:9-38:37
+55            android:name="unity.allow-resizable-window"
+55-->[:unityLibrary] C:\Users\13aug\OneDrive\Desktop\Create WIth Yash\Projects\Saasaki\Exportyy\unityLibrary\build\intermediates\merged_manifest\debug\AndroidManifest.xml:37:13-56
+56            android:value="False" />
+56-->[:unityLibrary] C:\Users\13aug\OneDrive\Desktop\Create WIth Yash\Projects\Saasaki\Exportyy\unityLibrary\build\intermediates\merged_manifest\debug\AndroidManifest.xml:38:13-34
+57        <meta-data
+57-->[:unityLibrary] C:\Users\13aug\OneDrive\Desktop\Create WIth Yash\Projects\Saasaki\Exportyy\unityLibrary\build\intermediates\merged_manifest\debug\AndroidManifest.xml:39:9-41:50
+58            android:name="notch.config"
+58-->[:unityLibrary] C:\Users\13aug\OneDrive\Desktop\Create WIth Yash\Projects\Saasaki\Exportyy\unityLibrary\build\intermediates\merged_manifest\debug\AndroidManifest.xml:40:13-40
+59            android:value="portrait|landscape" />
+59-->[:unityLibrary] C:\Users\13aug\OneDrive\Desktop\Create WIth Yash\Projects\Saasaki\Exportyy\unityLibrary\build\intermediates\merged_manifest\debug\AndroidManifest.xml:41:13-47
+60        <meta-data
+60-->[:unityLibrary] C:\Users\13aug\OneDrive\Desktop\Create WIth Yash\Projects\Saasaki\Exportyy\unityLibrary\build\intermediates\merged_manifest\debug\AndroidManifest.xml:42:9-44:36
+61            android:name="unity.auto-report-fully-drawn"
+61-->[:unityLibrary] C:\Users\13aug\OneDrive\Desktop\Create WIth Yash\Projects\Saasaki\Exportyy\unityLibrary\build\intermediates\merged_manifest\debug\AndroidManifest.xml:43:13-57
+62            android:value="true" />
+62-->[:unityLibrary] C:\Users\13aug\OneDrive\Desktop\Create WIth Yash\Projects\Saasaki\Exportyy\unityLibrary\build\intermediates\merged_manifest\debug\AndroidManifest.xml:44:13-33
+63
+64        <activity
+64-->[:unityLibrary] C:\Users\13aug\OneDrive\Desktop\Create WIth Yash\Projects\Saasaki\Exportyy\unityLibrary\build\intermediates\merged_manifest\debug\AndroidManifest.xml:46:9-67:20
+65            android:name="com.unity3d.player.UnityPlayerActivity"
+65-->[:unityLibrary] C:\Users\13aug\OneDrive\Desktop\Create WIth Yash\Projects\Saasaki\Exportyy\unityLibrary\build\intermediates\merged_manifest\debug\AndroidManifest.xml:47:13-66
+66            android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|orientation|screenLayout|uiMode|screenSize|smallestScreenSize|fontScale|layoutDirection|density"
+66-->[:unityLibrary] C:\Users\13aug\OneDrive\Desktop\Create WIth Yash\Projects\Saasaki\Exportyy\unityLibrary\build\intermediates\merged_manifest\debug\AndroidManifest.xml:48:13-194
+67            android:exported="true"
+67-->[:unityLibrary] C:\Users\13aug\OneDrive\Desktop\Create WIth Yash\Projects\Saasaki\Exportyy\unityLibrary\build\intermediates\merged_manifest\debug\AndroidManifest.xml:49:13-36
+68            android:hardwareAccelerated="false"
+68-->[:unityLibrary] C:\Users\13aug\OneDrive\Desktop\Create WIth Yash\Projects\Saasaki\Exportyy\unityLibrary\build\intermediates\merged_manifest\debug\AndroidManifest.xml:50:13-48
+69            android:launchMode="singleTask"
+69-->[:unityLibrary] C:\Users\13aug\OneDrive\Desktop\Create WIth Yash\Projects\Saasaki\Exportyy\unityLibrary\build\intermediates\merged_manifest\debug\AndroidManifest.xml:51:13-44
+70            android:resizeableActivity="false"
+70-->[:unityLibrary] C:\Users\13aug\OneDrive\Desktop\Create WIth Yash\Projects\Saasaki\Exportyy\unityLibrary\build\intermediates\merged_manifest\debug\AndroidManifest.xml:52:13-47
+71            android:screenOrientation="fullUser"
+71-->[:unityLibrary] C:\Users\13aug\OneDrive\Desktop\Create WIth Yash\Projects\Saasaki\Exportyy\unityLibrary\build\intermediates\merged_manifest\debug\AndroidManifest.xml:53:13-49
+72            android:theme="@style/UnityThemeSelector" >
+72-->[:unityLibrary] C:\Users\13aug\OneDrive\Desktop\Create WIth Yash\Projects\Saasaki\Exportyy\unityLibrary\build\intermediates\merged_manifest\debug\AndroidManifest.xml:54:13-54
+73            <intent-filter>
+73-->[:unityLibrary] C:\Users\13aug\OneDrive\Desktop\Create WIth Yash\Projects\Saasaki\Exportyy\unityLibrary\build\intermediates\merged_manifest\debug\AndroidManifest.xml:55:13-59:29
+74                <category android:name="android.intent.category.LAUNCHER" />
+74-->[:unityLibrary] C:\Users\13aug\OneDrive\Desktop\Create WIth Yash\Projects\Saasaki\Exportyy\unityLibrary\build\intermediates\merged_manifest\debug\AndroidManifest.xml:56:17-77
+74-->[:unityLibrary] C:\Users\13aug\OneDrive\Desktop\Create WIth Yash\Projects\Saasaki\Exportyy\unityLibrary\build\intermediates\merged_manifest\debug\AndroidManifest.xml:56:27-74
+75
+76                <action android:name="android.intent.action.MAIN" />
+76-->[:unityLibrary] C:\Users\13aug\OneDrive\Desktop\Create WIth Yash\Projects\Saasaki\Exportyy\unityLibrary\build\intermediates\merged_manifest\debug\AndroidManifest.xml:58:17-69
+76-->[:unityLibrary] C:\Users\13aug\OneDrive\Desktop\Create WIth Yash\Projects\Saasaki\Exportyy\unityLibrary\build\intermediates\merged_manifest\debug\AndroidManifest.xml:58:25-66
+77            </intent-filter>
+78
+79            <meta-data
+79-->[:unityLibrary] C:\Users\13aug\OneDrive\Desktop\Create WIth Yash\Projects\Saasaki\Exportyy\unityLibrary\build\intermediates\merged_manifest\debug\AndroidManifest.xml:61:13-63:40
+80                android:name="unityplayer.UnityActivity"
+80-->[:unityLibrary] C:\Users\13aug\OneDrive\Desktop\Create WIth Yash\Projects\Saasaki\Exportyy\unityLibrary\build\intermediates\merged_manifest\debug\AndroidManifest.xml:62:17-57
+81                android:value="true" />
+81-->[:unityLibrary] C:\Users\13aug\OneDrive\Desktop\Create WIth Yash\Projects\Saasaki\Exportyy\unityLibrary\build\intermediates\merged_manifest\debug\AndroidManifest.xml:63:17-37
+82            <meta-data
+82-->[:unityLibrary] C:\Users\13aug\OneDrive\Desktop\Create WIth Yash\Projects\Saasaki\Exportyy\unityLibrary\build\intermediates\merged_manifest\debug\AndroidManifest.xml:64:13-66:40
+83                android:name="notch_support"
+83-->[:unityLibrary] C:\Users\13aug\OneDrive\Desktop\Create WIth Yash\Projects\Saasaki\Exportyy\unityLibrary\build\intermediates\merged_manifest\debug\AndroidManifest.xml:65:17-45
+84                android:value="true" />
+84-->[:unityLibrary] C:\Users\13aug\OneDrive\Desktop\Create WIth Yash\Projects\Saasaki\Exportyy\unityLibrary\build\intermediates\merged_manifest\debug\AndroidManifest.xml:66:17-37
+85        </activity>
+86
+87        <receiver
+87-->[:unityLibrary:mobilenotifications.androidlib] C:\Users\13aug\OneDrive\Desktop\Create WIth Yash\Projects\Saasaki\Exportyy\unityLibrary\mobilenotifications.androidlib\build\intermediates\merged_manifest\debug\AndroidManifest.xml:14:9-16:40
+88            android:name="com.unity.androidnotifications.UnityNotificationManager"
+88-->[:unityLibrary:mobilenotifications.androidlib] C:\Users\13aug\OneDrive\Desktop\Create WIth Yash\Projects\Saasaki\Exportyy\unityLibrary\mobilenotifications.androidlib\build\intermediates\merged_manifest\debug\AndroidManifest.xml:15:13-83
+89            android:exported="false" />
+89-->[:unityLibrary:mobilenotifications.androidlib] C:\Users\13aug\OneDrive\Desktop\Create WIth Yash\Projects\Saasaki\Exportyy\unityLibrary\mobilenotifications.androidlib\build\intermediates\merged_manifest\debug\AndroidManifest.xml:16:13-37
+90        <receiver
+90-->[:unityLibrary:mobilenotifications.androidlib] C:\Users\13aug\OneDrive\Desktop\Create WIth Yash\Projects\Saasaki\Exportyy\unityLibrary\mobilenotifications.androidlib\build\intermediates\merged_manifest\debug\AndroidManifest.xml:17:9-24:20
+91            android:name="com.unity.androidnotifications.UnityNotificationRestartReceiver"
+91-->[:unityLibrary:mobilenotifications.androidlib] C:\Users\13aug\OneDrive\Desktop\Create WIth Yash\Projects\Saasaki\Exportyy\unityLibrary\mobilenotifications.androidlib\build\intermediates\merged_manifest\debug\AndroidManifest.xml:18:13-91
+92            android:enabled="false"
+92-->[:unityLibrary:mobilenotifications.androidlib] C:\Users\13aug\OneDrive\Desktop\Create WIth Yash\Projects\Saasaki\Exportyy\unityLibrary\mobilenotifications.androidlib\build\intermediates\merged_manifest\debug\AndroidManifest.xml:19:13-36
+93            android:exported="false" >
+93-->[:unityLibrary:mobilenotifications.androidlib] C:\Users\13aug\OneDrive\Desktop\Create WIth Yash\Projects\Saasaki\Exportyy\unityLibrary\mobilenotifications.androidlib\build\intermediates\merged_manifest\debug\AndroidManifest.xml:20:13-37
+94            <intent-filter>
+94-->[:unityLibrary:mobilenotifications.androidlib] C:\Users\13aug\OneDrive\Desktop\Create WIth Yash\Projects\Saasaki\Exportyy\unityLibrary\mobilenotifications.androidlib\build\intermediates\merged_manifest\debug\AndroidManifest.xml:21:13-23:29
+95                <action android:name="android.intent.action.BOOT_COMPLETED" />
+95-->[:unityLibrary:mobilenotifications.androidlib] C:\Users\13aug\OneDrive\Desktop\Create WIth Yash\Projects\Saasaki\Exportyy\unityLibrary\mobilenotifications.androidlib\build\intermediates\merged_manifest\debug\AndroidManifest.xml:22:17-79
+95-->[:unityLibrary:mobilenotifications.androidlib] C:\Users\13aug\OneDrive\Desktop\Create WIth Yash\Projects\Saasaki\Exportyy\unityLibrary\mobilenotifications.androidlib\build\intermediates\merged_manifest\debug\AndroidManifest.xml:22:25-76
+96            </intent-filter>
+97        </receiver>
+98
+99        <meta-data
+99-->[:unityLibrary:mobilenotifications.androidlib] C:\Users\13aug\OneDrive\Desktop\Create WIth Yash\Projects\Saasaki\Exportyy\unityLibrary\mobilenotifications.androidlib\build\intermediates\merged_manifest\debug\AndroidManifest.xml:26:9-28:36
+100            android:name="reschedule_notifications_on_restart"
+100-->[:unityLibrary:mobilenotifications.androidlib] C:\Users\13aug\OneDrive\Desktop\Create WIth Yash\Projects\Saasaki\Exportyy\unityLibrary\mobilenotifications.androidlib\build\intermediates\merged_manifest\debug\AndroidManifest.xml:27:13-63
+101            android:value="true" />
+101-->[:unityLibrary:mobilenotifications.androidlib] C:\Users\13aug\OneDrive\Desktop\Create WIth Yash\Projects\Saasaki\Exportyy\unityLibrary\mobilenotifications.androidlib\build\intermediates\merged_manifest\debug\AndroidManifest.xml:28:13-33
+102        <meta-data
+102-->[:unityLibrary:mobilenotifications.androidlib] C:\Users\13aug\OneDrive\Desktop\Create WIth Yash\Projects\Saasaki\Exportyy\unityLibrary\mobilenotifications.androidlib\build\intermediates\merged_manifest\debug\AndroidManifest.xml:29:9-31:33
+103            android:name="com.unity.androidnotifications.exact_scheduling"
+103-->[:unityLibrary:mobilenotifications.androidlib] C:\Users\13aug\OneDrive\Desktop\Create WIth Yash\Projects\Saasaki\Exportyy\unityLibrary\mobilenotifications.androidlib\build\intermediates\merged_manifest\debug\AndroidManifest.xml:30:13-75
+104            android:value="0" />
+104-->[:unityLibrary:mobilenotifications.androidlib] C:\Users\13aug\OneDrive\Desktop\Create WIth Yash\Projects\Saasaki\Exportyy\unityLibrary\mobilenotifications.androidlib\build\intermediates\merged_manifest\debug\AndroidManifest.xml:31:13-30
+105    </application>
+106
+107</manifest>
