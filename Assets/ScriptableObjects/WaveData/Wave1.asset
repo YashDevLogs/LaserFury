@@ -19,3 +19,4 @@ MonoBehaviour:
   - {x: -0.139, y: 1.206, z: 11.52}
   initialRotations:
   - {x: 0.6620018, y: 185.35025, z: 0.4079962}
+  laserRange: 50

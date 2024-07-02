@@ -1,16 +1,15 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 public class SlowDownPowerUp : MonoBehaviour, IPowerUps
 {
-    public float duration = 10f;
-    public float slowDownFactor = 0.5f;
+    public float duration = 5f; // Duration for the time slowdown
+    public float slowDownFactor = 0.5f; // Factor by which time will be slowed down
 
     public void ApplyPowerUp(Player player)
     {
-        foreach (Laser laser in FindObjectsOfType<Laser>())
-        {
-            laser.RotationSpeed *= slowDownFactor;
-        }
+        Time.timeScale = slowDownFactor;
+        Time.fixedDeltaTime = Time.timeScale * 0.02f;
     }
 
     public float PowerUpDuration()
@@ -20,9 +19,9 @@ public class SlowDownPowerUp : MonoBehaviour, IPowerUps
 
     public void RemovePowerUp(Player player)
     {
-        foreach (Laser laser in FindObjectsOfType<Laser>())
-        {
-            laser.RotationSpeed /= slowDownFactor;
-        }
+        Time.timeScale = 1f;
+        Time.fixedDeltaTime = 0.02f;
     }
+
+
 }
