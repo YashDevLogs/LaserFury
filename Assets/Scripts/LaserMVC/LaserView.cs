@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(LineRenderer))]
@@ -20,5 +21,10 @@ public class LaserView : MonoBehaviour
     public void EnableLaser(bool enable)
     {
         laserLine.enabled = enable;
+    }
+
+    internal void SetActive(bool v)
+    {
+        gameObject.SetActive(v);
     }
 }

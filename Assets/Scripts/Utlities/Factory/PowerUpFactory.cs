@@ -3,19 +3,19 @@ using System.Collections.Generic;
 
 public class PowerUpFactory
 {
-    private Dictionary<string, GameObject> powerUpPrefabs;
+    private Dictionary<PowerupTypes, GameObject> powerUpPrefabs;
 
     public PowerUpFactory()
     {
-        powerUpPrefabs = new Dictionary<string, GameObject>
+        powerUpPrefabs = new Dictionary<PowerupTypes, GameObject>
         {
-            { "Shield", Resources.Load<GameObject>("Prefabs/ShieldPowerUp") },
-            { "SlowDown", Resources.Load<GameObject>("Prefabs/SlowDownPowerUp") },
-            { "LaserProtectionGear", Resources.Load<GameObject>("Prefabs/LaserProtectionGearPowerUp") }
+            { PowerupTypes.Shield, Resources.Load<GameObject>("Prefabs/ShieldPowerUp") },
+            { PowerupTypes.SlowDown, Resources.Load<GameObject>("Prefabs/SlowDownPowerUp") },
+            { PowerupTypes.LaserProtectionGear, Resources.Load<GameObject>("Prefabs/LaserProtectionGearPowerUp") }
         };
     }
 
-    public GameObject CreatePowerUp(string type)
+    public GameObject CreatePowerUp(PowerupTypes type)
     {
         if (powerUpPrefabs.ContainsKey(type))
         {

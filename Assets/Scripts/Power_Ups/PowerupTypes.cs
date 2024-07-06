@@ -2,5 +2,5 @@
 {
     Shield,
     SlowDown,
-    Armour
+    LaserProtectionGear
 }

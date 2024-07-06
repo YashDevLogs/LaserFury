@@ -1768,10 +1768,9 @@ GameObject:
   - component: {fileID: 7897370634871500031}
   - component: {fileID: 7164770887485262502}
   - component: {fileID: 8711306165166188346}
-  - component: {fileID: 8327163391356851706}
   - component: {fileID: -3866630269608441999}
   m_Layer: 0
-  m_Name: LaserBeam 1
+  m_Name: LaserBeam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1970,18 +1969,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 3.4200313, y: 4.9519053, z: 6.3058777}
   m_Center: {x: 0.009306239, y: 0.69098175, z: 1.5699192}
---- !u!114 &8327163391356851706
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4432181107268820371}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 739e8c53494bc3346825af7e97a06563, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &-3866630269608441999
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1994,6 +1981,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4c147705f3c5c24d879b90c8ac480c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  laserSpawnTransform: {fileID: 0}
+  laserRange: 10
+  rotationSpeed: 30
+  rotationRange: 90
 --- !u!1 &4760586505676540066
 GameObject:
   m_ObjectHideFlags: 0
