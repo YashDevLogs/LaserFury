@@ -2750,12 +2750,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a19af0bae4f8a2341a980bd52bd477c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waves:
-  - {fileID: 11400000, guid: 5e1b9e0610160354c97871be5b0bb1e1, type: 2}
-  - {fileID: 11400000, guid: 471a1a781f28d29468fffa4f966f780a, type: 2}
-  - {fileID: 11400000, guid: 394b7a709a8020540ae931bc4c91e7ba, type: 2}
-  - {fileID: 11400000, guid: e6e266b239bf6fd478d1dd43faeb6714, type: 2}
-  - {fileID: 11400000, guid: 6c151dc88ca57084982e555cfda5cbf1, type: 2}
   playerPrefab: {fileID: 1494923224882918187, guid: 4faa7110f8344ec4f90b10543441c0be,
     type: 3}
   playerSpawnPoint: {fileID: 1494923224882918187, guid: 4faa7110f8344ec4f90b10543441c0be,

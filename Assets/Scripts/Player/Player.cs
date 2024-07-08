@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -7,12 +6,17 @@ public class Player : MonoBehaviour
     public bool HasShield { get; set; }
     public bool HasLaserProtectionGear { get; set; }
 
+    private bool isPowerUpActive = false;
+    private IPowerUps activePowerUp;
+    private float powerUpStartTime;
+    private float powerUpDuration;
+
     public void Die()
     {
         EventService.PlayerDied();
     }
 
-private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         Debug.Log("Trigger entered with: " + other.gameObject.name);
         if (other.gameObject.CompareTag("PowerUp"))
@@ -21,7 +25,7 @@ private void OnTriggerEnter(Collider other)
             if (powerUp != null)
             {
                 Destroy(other.gameObject);
-                StartCoroutine(PowerUpCycle(powerUp));
+                ApplyPowerUp(powerUp);
             }
             else
             {
@@ -30,10 +34,31 @@ private void OnTriggerEnter(Collider other)
         }
     }
 
-    private IEnumerator PowerUpCycle(IPowerUps powerUp)
+    private void Update()
     {
-        powerUp.ApplyPowerUp(this);
-        yield return new WaitForSeconds(powerUp.PowerUpDuration());
+        // Check if a power-up is active and should be expired
+        if (isPowerUpActive && Time.time >= powerUpStartTime + powerUpDuration)
+        {
+            RemovePowerUp(activePowerUp);
+        }
+    }
+
+    private void ApplyPowerUp(IPowerUps powerUp)
+    {
+        if (!isPowerUpActive)
+        {
+            isPowerUpActive = true;
+            activePowerUp = powerUp;
+            powerUpStartTime = Time.time;
+            powerUpDuration = powerUp.PowerUpDuration();
+            powerUp.ApplyPowerUp(this);
+        }
+    }
+
+    private void RemovePowerUp(IPowerUps powerUp)
+    {
+        isPowerUpActive = false;
+        activePowerUp = null;
         powerUp.RemovePowerUp(this);
     }
 }

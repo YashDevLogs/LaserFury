@@ -74,7 +74,7 @@ public class GameManager : GenericMonoSingleton<GameManager>
         EventService.OnPlayerDeath += GameOver;
 
         WaveManager.Instance.ResetWaveManager();
-        StartCoroutine(WaveManager.Instance.StartWaveWithCountdown(3));
-        StartCoroutine(PowerUpSpawnManager.Instance.SpawnPowerUps());
+        StartCoroutine( WaveManager.Instance.StartWaveWithCountdown(3));
+        PowerUpSpawnManager.Instance.SpawnRandomPowerUp();
     }
 }

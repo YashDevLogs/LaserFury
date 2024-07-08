@@ -10,10 +10,9 @@ public class LaserController : MonoBehaviour
     private bool rotatingRight = true;
     private float currentRotationAngle = 0f;
 
-    private Coroutine laserCoroutine;
+    private bool isLaserActive = false;
 
     public float RotationSpeed;
-
 
     public void InitializeLaser(LaserModel model, LaserView view, Transform spawnTransform)
     {
@@ -25,77 +24,72 @@ public class LaserController : MonoBehaviour
 
     public void StartLaser()
     {
-        if (laserCoroutine == null)
-        {
-            laserCoroutine = StartCoroutine(ShootLaser());
-        }
+        isLaserActive = true;
+        laserView.EnableLaser(true);
     }
 
     public void StopLaser()
     {
-        if (laserCoroutine != null)
+        isLaserActive = false;
+        laserView.EnableLaser(false);
+    }
+
+    private void Update()
+    {
+        if (isLaserActive)
         {
-            StopCoroutine(laserCoroutine);
-            laserView.EnableLaser(false);
-            laserCoroutine = null;
+            ShootLaser();
         }
     }
 
-    private IEnumerator ShootLaser()
+    private void ShootLaser()
     {
-        laserView.EnableLaser(true);
-
-        while (true)
+        if (rotatingRight)
         {
-            if (rotatingRight)
-            {
-                float rotationStep = laserModel.RotationSpeed * Time.deltaTime;
-                transform.Rotate(Vector3.up, rotationStep);
-                currentRotationAngle += rotationStep;
+            float rotationStep = laserModel.RotationSpeed * Time.deltaTime;
+            transform.Rotate(Vector3.up, rotationStep);
+            currentRotationAngle += rotationStep;
 
-                if (currentRotationAngle >= laserModel.RotationRange)
+            if (currentRotationAngle >= laserModel.RotationRange)
+            {
+                rotatingRight = false;
+            }
+        }
+        else
+        {
+            float rotationStep = laserModel.RotationSpeed * Time.deltaTime;
+            transform.Rotate(Vector3.up, -rotationStep);
+            currentRotationAngle -= rotationStep;
+
+            if (currentRotationAngle <= -laserModel.RotationRange)
+            {
+                rotatingRight = true;
+            }
+        }
+
+        // Check for collisions with the laser beam
+        RaycastHit hit;
+        if (Physics.Raycast(laserSpawn.position, laserSpawn.forward, out hit, laserModel.LaserRange))
+        {
+            laserView.SetLaserPositions(laserSpawn.position, hit.point);
+
+            // Check if the collision is with an object tagged as "Player"
+            if (hit.collider.CompareTag("Player"))
+            {
+                Player player = hit.collider.GetComponent<Player>();
+
+                // Ensure the player is not protected by shields or gear
+                if (player != null && !player.HasShield && !player.HasLaserProtectionGear)
                 {
-                    rotatingRight = false;
+                    player.Die();
+                    StopLaser();
                 }
             }
-            else
-            {
-                float rotationStep = laserModel.RotationSpeed * Time.deltaTime;
-                transform.Rotate(Vector3.up, -rotationStep);
-                currentRotationAngle -= rotationStep;
-
-                if (currentRotationAngle <= -laserModel.RotationRange)
-                {
-                    rotatingRight = true;
-                }
-            }
-
-            // Check for collisions with the laser beam
-            RaycastHit hit;
-            if (Physics.Raycast(laserSpawn.position, laserSpawn.forward, out hit, laserModel.LaserRange))
-            {
-                laserView.SetLaserPositions(laserSpawn.position, hit.point);
-
-                // Check if the collision is with an object tagged as "Player"
-                if (hit.collider.CompareTag("Player"))
-                {
-                    Player player = hit.collider.GetComponent<Player>();
-
-                    // Ensure the player is not protected by shields or gear
-                    if (player != null && !player.HasShield && !player.HasLaserProtectionGear)
-                    {
-                        player.Die();
-                        yield break; // Exit the coroutine early
-                    }
-                }
-            }
-            else
-            {
-                // If no collision, extend the laser beam to its maximum range
-                laserView.SetLaserPositions(laserSpawn.position, laserSpawn.position + laserSpawn.forward * laserModel.LaserRange);
-            }
-
-            yield return null;
+        }
+        else
+        {
+            // If no collision, extend the laser beam to its maximum range
+            laserView.SetLaserPositions(laserSpawn.position, laserSpawn.position + laserSpawn.forward * laserModel.LaserRange);
         }
     }
 
