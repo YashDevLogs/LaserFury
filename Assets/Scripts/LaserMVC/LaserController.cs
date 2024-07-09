@@ -1,7 +1,6 @@
-using System.Collections;
 using UnityEngine;
 
-public class LaserController : MonoBehaviour
+public class LaserController
 {
     private LaserModel laserModel;
     private LaserView laserView;
@@ -10,11 +9,9 @@ public class LaserController : MonoBehaviour
     private bool rotatingRight = true;
     private float currentRotationAngle = 0f;
 
-    private bool isLaserActive = false;
+    public float RotationSpeed { get; private set; }
 
-    public float RotationSpeed;
-
-    public void InitializeLaser(LaserModel model, LaserView view, Transform spawnTransform)
+    public LaserController(LaserModel model, LaserView view, Transform spawnTransform)
     {
         laserModel = model;
         laserView = view;
@@ -22,21 +19,9 @@ public class LaserController : MonoBehaviour
         RotationSpeed = laserModel.RotationSpeed;
     }
 
-    public void StartLaser()
+    public void UpdateLaser()
     {
-        isLaserActive = true;
-        laserView.EnableLaser(true);
-    }
-
-    public void StopLaser()
-    {
-        isLaserActive = false;
-        laserView.EnableLaser(false);
-    }
-
-    private void Update()
-    {
-        if (isLaserActive)
+        if (laserView.isLaserActive)
         {
             ShootLaser();
         }
@@ -47,7 +32,7 @@ public class LaserController : MonoBehaviour
         if (rotatingRight)
         {
             float rotationStep = laserModel.RotationSpeed * Time.deltaTime;
-            transform.Rotate(Vector3.up, rotationStep);
+            laserSpawn.Rotate(Vector3.up, rotationStep);
             currentRotationAngle += rotationStep;
 
             if (currentRotationAngle >= laserModel.RotationRange)
@@ -58,7 +43,7 @@ public class LaserController : MonoBehaviour
         else
         {
             float rotationStep = laserModel.RotationSpeed * Time.deltaTime;
-            transform.Rotate(Vector3.up, -rotationStep);
+            laserSpawn.Rotate(Vector3.up, -rotationStep);
             currentRotationAngle -= rotationStep;
 
             if (currentRotationAngle <= -laserModel.RotationRange)
@@ -82,7 +67,7 @@ public class LaserController : MonoBehaviour
                 if (player != null && !player.HasShield && !player.HasLaserProtectionGear)
                 {
                     player.Die();
-                    StopLaser();
+                    laserView.StopLaser();
                 }
             }
         }

@@ -55,26 +55,30 @@ public class GameManager : GenericMonoSingleton<GameManager>
 
         Time.timeScale = 1;
 
-        foreach (LaserController laserController in WaveManager.Instance.activeLaserControllers)
+        // Clear existing lasers
+        foreach (LaserView laserView in WaveManager.Instance.activeLaserViews)
         {
-            laserController.StopLaser();
-            Destroy(laserController.gameObject);
+            laserView.StopLaser();
+            Destroy(laserView.gameObject);
         }
-        WaveManager.Instance.activeLaserControllers.Clear();
+        WaveManager.Instance.activeLaserViews.Clear();
 
+        // Clear existing power-ups
         foreach (GameObject powerUp in PowerUpSpawnManager.Instance.activePowerUps)
         {
             Destroy(powerUp);
         }
         PowerUpSpawnManager.Instance.activePowerUps.Clear();
 
+        // Destroy existing player and respawn
         Destroy(player.gameObject);
-
         player = Instantiate(playerPrefab, playerSpawnPoint.position, playerSpawnPoint.rotation).GetComponent<Player>();
         EventService.OnPlayerDeath += GameOver;
 
+        // Reset and start new wave
         WaveManager.Instance.ResetWaveManager();
-        StartCoroutine( WaveManager.Instance.StartWaveWithCountdown(3));
+        StartCoroutine(WaveManager.Instance.StartWaveWithCountdown(3));
         PowerUpSpawnManager.Instance.SpawnRandomPowerUp();
     }
+
 }

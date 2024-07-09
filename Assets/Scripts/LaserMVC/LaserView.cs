@@ -5,6 +5,7 @@ using UnityEngine;
 public class LaserView : MonoBehaviour
 {
     private LineRenderer laserLine;
+    public bool isLaserActive = false;
 
     private void Awake()
     {
@@ -21,6 +22,18 @@ public class LaserView : MonoBehaviour
     public void EnableLaser(bool enable)
     {
         laserLine.enabled = enable;
+    }
+
+    public void StartLaser()
+    {
+        isLaserActive = true;
+        EnableLaser(true);
+    }
+
+    public void StopLaser()
+    {
+        isLaserActive = false;
+        EnableLaser(false);
     }
 
     internal void SetActive(bool v)

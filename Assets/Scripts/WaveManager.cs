@@ -1,7 +1,6 @@
 using Assets.Scripts.Utlities;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class WaveManager : GenericMonoSingleton<WaveManager>
@@ -11,7 +10,8 @@ public class WaveManager : GenericMonoSingleton<WaveManager>
     [SerializeField] private LaserView laserPrefab;
     private LaserFactory laserFactory;
 
-    public List<LaserController> activeLaserControllers = new List<LaserController>();
+    public List<LaserView> activeLaserViews = new List<LaserView>();
+    private List<LaserController> activeLaserControllers = new List<LaserController>();
 
     public float waveDuration = 10f;
 
@@ -22,6 +22,14 @@ public class WaveManager : GenericMonoSingleton<WaveManager>
     {
         laserFactory = new LaserFactory(laserPrefab, 10);
         StartCoroutine(StartWaveWithCountdown(3));
+    }
+
+    private void Update()
+    {
+        foreach (var laserController in activeLaserControllers)
+        {
+            laserController.UpdateLaser();
+        }
     }
 
     private void StartWave()
@@ -44,10 +52,10 @@ public class WaveManager : GenericMonoSingleton<WaveManager>
 
             LaserModel laserModel = new LaserModel(currentWave.laserRange, currentWave.rotationSpeed, currentWave.rotationRange);
             LaserView laserView = laserObj.GetComponent<LaserView>();
-            LaserController laserController = laserObj.AddComponent<LaserController>();
-            laserController.InitializeLaser(laserModel, laserView, laserObj.transform);
-            laserController.StartLaser();
+            LaserController laserController = new LaserController(laserModel, laserView, laserObj.transform);
+            laserView.StartLaser();
 
+            activeLaserViews.Add(laserView);
             activeLaserControllers.Add(laserController);
         }
 
@@ -98,11 +106,12 @@ public class WaveManager : GenericMonoSingleton<WaveManager>
         UIManager.Instance.waveText.text = "Wave " + (currentWaveIndex + 1) + " Completed!";
         UIManager.Instance.waveText.gameObject.SetActive(true);
 
-        foreach (LaserController laserController in activeLaserControllers)
+        foreach (LaserView laserView in activeLaserViews)
         {
-            laserController.StopLaser();
-            Destroy(laserController.gameObject);
+            laserView.StopLaser();
+            Destroy(laserView.gameObject);
         }
+        activeLaserViews.Clear();
         activeLaserControllers.Clear();
 
         currentWaveIndex++;
