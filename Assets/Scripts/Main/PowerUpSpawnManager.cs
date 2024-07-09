@@ -2,24 +2,30 @@ using Assets.Scripts.Utlities;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PowerUpSpawnManager : GenericMonoSingleton<PowerUpSpawnManager>
+public class PowerUpSpawnManager : MonoBehaviour
 {
     private float powerUpSpawnInterval = 10f;
     [SerializeField] private Transform[] powerUpSpawnPoints;
+    [SerializeField] private PowerUpDatabase powerUpDatabase;
     private PowerUpFactory powerUpFactory;
-    public List<GameObject> activePowerUps = new List<GameObject>();
 
     private float timer;
+/*
+    public PowerUpSpawnManager(Transform[] powerUpSpawnPoints, PowerUpDatabase powerUpDatabase )
+    {
+        this.powerUpDatabase = powerUpDatabase;
+        this.powerUpSpawnPoints = powerUpSpawnPoints;
+    }*/
 
     private void Start()
     {
-        powerUpFactory = new PowerUpFactory();
+        powerUpFactory = new PowerUpFactory(powerUpDatabase);
         timer = powerUpSpawnInterval;
     }
 
-    private void Update()
+    public void Update()
     {
-        if (!GameManager.Instance.GameEnded)
+        if (!ServiceLocator.Instance.GameManager.GameEnded)  
         {
             timer -= Time.deltaTime;
             if (timer <= 0f)
@@ -40,7 +46,6 @@ public class PowerUpSpawnManager : GenericMonoSingleton<PowerUpSpawnManager>
         if (powerUp != null)
         {
             powerUp.transform.position = spawnPoint.position;
-            activePowerUps.Add(powerUp);
         }
     }
 }

@@ -77,18 +77,5 @@ public class LaserController
             laserView.SetLaserPositions(laserSpawn.position, laserSpawn.position + laserSpawn.forward * laserModel.LaserRange);
         }
     }
-
-    private Vector3 CalculateLaserEndPoint()
-    {
-        Vector3 rayOrigin = laserSpawn.position;
-        RaycastHit hit;
-        if (Physics.Raycast(rayOrigin, laserSpawn.transform.forward, out hit, laserModel.LaserRange))
-        {
-            return hit.point;
-        }
-        else
-        {
-            return rayOrigin + (laserSpawn.transform.forward * laserModel.LaserRange);
-        }
-    }
 }
+

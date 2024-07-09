@@ -2,7 +2,7 @@ using Assets.Scripts.Utlities;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WaveManager : GenericMonoSingleton<WaveManager>
+public class WaveManager : MonoBehaviour
 {
     [SerializeField] private WaveData_SO[] waves;
     public int currentWaveIndex = 0;
@@ -50,7 +50,7 @@ public class WaveManager : GenericMonoSingleton<WaveManager>
     {
         if (currentWaveIndex >= waves.Length)
         {
-            GameManager.Instance.GameWon();
+            ServiceLocator.Instance.GameManager.GameWon();
             return;
         }
 
@@ -79,10 +79,10 @@ public class WaveManager : GenericMonoSingleton<WaveManager>
 
     public void StartWaveWithCountdown(int countdown)
     {
-        UIManager.Instance.waveText.text = "Wave " + (currentWaveIndex + 1);
-        UIManager.Instance.waveText.gameObject.SetActive(true);
+        ServiceLocator.Instance.UIManager.waveText.text = "Wave " + (currentWaveIndex + 1);
+        ServiceLocator.Instance.UIManager.waveText.gameObject.SetActive(true);
 
-        UIManager.Instance.countdownText.gameObject.SetActive(true);
+        ServiceLocator.Instance.UIManager.countdownText.gameObject.SetActive(true);
         countdownTime = countdown;
         isCountdownActive = true;
     }
@@ -92,14 +92,14 @@ public class WaveManager : GenericMonoSingleton<WaveManager>
         if (countdownTime > 0)
         {
             countdownTime -= Time.deltaTime;
-            UIManager.Instance.countdownText.text = Mathf.CeilToInt(countdownTime).ToString();
+            ServiceLocator.Instance.UIManager.countdownText.text = Mathf.CeilToInt(countdownTime).ToString();
         }
         else
         {
-            UIManager.Instance.countdownText.text = "Start!";
+            ServiceLocator.Instance.UIManager.countdownText.text = "Start!";
             isCountdownActive = false;
-            UIManager.Instance.countdownText.gameObject.SetActive(false);
-            UIManager.Instance.waveText.gameObject.SetActive(false);
+            ServiceLocator.Instance.UIManager.countdownText.gameObject.SetActive(false);
+            ServiceLocator.Instance.UIManager.waveText.gameObject.SetActive(false);
             StartWave();
         }
     }
@@ -109,8 +109,8 @@ public class WaveManager : GenericMonoSingleton<WaveManager>
         if (waveTimeRemaining > 0)
         {
             waveTimeRemaining -= Time.deltaTime;
-            UIManager.Instance.waveTimerText.text = "Time Remaining: " + Mathf.CeilToInt(waveTimeRemaining).ToString();
-            UIManager.Instance.waveTimerText.gameObject.SetActive(true);
+            ServiceLocator.Instance.UIManager.waveTimerText.text = "Time Remaining: " + Mathf.CeilToInt(waveTimeRemaining).ToString();
+            ServiceLocator.Instance.UIManager.waveTimerText.gameObject.SetActive(true);
         }
         else
         {
@@ -121,8 +121,8 @@ public class WaveManager : GenericMonoSingleton<WaveManager>
 
     private void OnWaveCompleted()
     {
-        UIManager.Instance.waveText.text = "Wave " + (currentWaveIndex + 1) + " Completed!";
-        UIManager.Instance.waveText.gameObject.SetActive(true);
+        ServiceLocator.Instance.UIManager.waveText.text = "Wave " + (currentWaveIndex + 1) + " Completed!";
+        ServiceLocator.Instance.UIManager.waveText.gameObject.SetActive(true);
 
         foreach (LaserView laserView in activeLaserViews)
         {
@@ -133,8 +133,8 @@ public class WaveManager : GenericMonoSingleton<WaveManager>
         activeLaserControllers.Clear();
 
         currentWaveIndex++;
-        UIManager.Instance.nextWaveText.text = "Next Wave: " + (currentWaveIndex + 1);
-        UIManager.Instance.nextWaveText.gameObject.SetActive(true);
+        ServiceLocator.Instance.UIManager.nextWaveText.text = "Next Wave: " + (currentWaveIndex + 1);
+        ServiceLocator.Instance.UIManager.nextWaveText.gameObject.SetActive(true);
 
         isWaveCompletePending = true;
         Invoke(nameof(HandleWaveCompletion), 2f);  // Schedule HandleWaveCompletion to run after 2 seconds
@@ -142,8 +142,8 @@ public class WaveManager : GenericMonoSingleton<WaveManager>
 
     private void HandleWaveCompletion()
     {
-        UIManager.Instance.waveText.gameObject.SetActive(false);
-        UIManager.Instance.nextWaveText.gameObject.SetActive(false);
+        ServiceLocator.Instance.UIManager.waveText.gameObject.SetActive(false);
+        ServiceLocator.Instance.UIManager.nextWaveText.gameObject.SetActive(false);
 
         if (currentWaveIndex < waves.Length)
         {
@@ -151,7 +151,7 @@ public class WaveManager : GenericMonoSingleton<WaveManager>
         }
         else
         {
-            GameManager.Instance.GameWon();
+            ServiceLocator.Instance.GameManager.GameWon();
         }
 
         isWaveCompletePending = false;
