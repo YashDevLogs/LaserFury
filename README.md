@@ -4,6 +4,15 @@
 
 Laser Defender is an exciting wave-based shooter game developed using Unity. The game involves strategic dodging and shooting as players navigate through waves of laser-firing enemies. The game is built with several design patterns and principles to ensure maintainability, scalability, and efficiency.
 
+![6](https://github.com/YashDevLogs/LaserFury/assets/91522919/b6b9db5c-2c14-42ef-8a89-f7b502be01d5)
+![5](https://github.com/YashDevLogs/LaserFury/assets/91522919/7d3f4d2e-76e9-4367-ba4b-5820da3120f9)
+![4](https://github.com/YashDevLogs/LaserFury/assets/91522919/f7ac3004-ba10-45ce-afec-821dd5e83f8c)
+![3](https://github.com/YashDevLogs/LaserFury/assets/91522919/4bdec236-8b28-464e-9dcb-523fc222e787)
+![2](https://github.com/YashDevLogs/LaserFury/assets/91522919/74501a4a-bc80-4a30-8599-984393d0d3ab)
+![1](https://github.com/YashDevLogs/LaserFury/assets/91522919/3a4ab6d7-47f9-4295-81f6-05409eb11779)
+
+![7](https://github.com/YashDevLogs/LaserFury/assets/91522919/8b33c62f-fb48-401a-ae5c-1ea29f3d8cca)
+
 ### Features
 - Wave-based gameplay: Survive through increasingly challenging waves of enemies.
 - Power-ups: Collect power-ups to gain temporary abilities like shields and speed boosts.
