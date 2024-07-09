@@ -77,7 +77,7 @@ public class GameManager : GenericMonoSingleton<GameManager>
 
         // Reset and start new wave
         WaveManager.Instance.ResetWaveManager();
-        StartCoroutine(WaveManager.Instance.StartWaveWithCountdown(3));
+        WaveManager.Instance.StartWaveWithCountdown(3);
         PowerUpSpawnManager.Instance.SpawnRandomPowerUp();
     }
 

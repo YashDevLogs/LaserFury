@@ -1,5 +1,4 @@
 using Assets.Scripts.Utlities;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,14 +13,16 @@ public class WaveManager : GenericMonoSingleton<WaveManager>
     private List<LaserController> activeLaserControllers = new List<LaserController>();
 
     public float waveDuration = 10f;
-
-    private Coroutine waveTimerCoroutine;
-    private Coroutine waveDurationCoroutine;
+    private float countdownTime = 0f;
+    private float waveTimeRemaining = 0f;
+    private bool isWaveActive = false;
+    private bool isCountdownActive = false;
+    private bool isWaveCompletePending = false;
 
     private void Start()
     {
         laserFactory = new LaserFactory(laserPrefab, 10);
-        StartCoroutine(StartWaveWithCountdown(3));
+        StartWaveWithCountdown(3);
     }
 
     private void Update()
@@ -29,6 +30,19 @@ public class WaveManager : GenericMonoSingleton<WaveManager>
         foreach (var laserController in activeLaserControllers)
         {
             laserController.UpdateLaser();
+        }
+
+        if (isCountdownActive)
+        {
+            HandleCountdown();
+        }
+        else if (isWaveActive)
+        {
+            HandleWaveDuration();
+        }
+        else if (isWaveCompletePending)
+        {
+            HandleWaveCompletion();
         }
     }
 
@@ -59,46 +73,50 @@ public class WaveManager : GenericMonoSingleton<WaveManager>
             activeLaserControllers.Add(laserController);
         }
 
-        waveTimerCoroutine = StartCoroutine(WaveTimer());
-        waveDurationCoroutine = StartCoroutine(CountdownWaveDuration());
+        waveTimeRemaining = waveDuration;
+        isWaveActive = true;
     }
 
-    public IEnumerator StartWaveWithCountdown(int countdown)
+    public void StartWaveWithCountdown(int countdown)
     {
         UIManager.Instance.waveText.text = "Wave " + (currentWaveIndex + 1);
         UIManager.Instance.waveText.gameObject.SetActive(true);
 
         UIManager.Instance.countdownText.gameObject.SetActive(true);
-        for (int i = countdown; i > 0; i--)
-        {
-            UIManager.Instance.countdownText.text = i.ToString();
-            yield return new WaitForSeconds(1f);
-        }
-        UIManager.Instance.countdownText.text = "Start!";
-        yield return new WaitForSeconds(1f);
-        UIManager.Instance.countdownText.gameObject.SetActive(false);
-        UIManager.Instance.waveText.gameObject.SetActive(false);
-
-        StartWave();
+        countdownTime = countdown;
+        isCountdownActive = true;
     }
 
-    private IEnumerator CountdownWaveDuration()
+    private void HandleCountdown()
     {
-        float timer = waveDuration;
-        while (timer >= 0f)
+        if (countdownTime > 0)
         {
+            countdownTime -= Time.deltaTime;
+            UIManager.Instance.countdownText.text = Mathf.CeilToInt(countdownTime).ToString();
+        }
+        else
+        {
+            UIManager.Instance.countdownText.text = "Start!";
+            isCountdownActive = false;
+            UIManager.Instance.countdownText.gameObject.SetActive(false);
+            UIManager.Instance.waveText.gameObject.SetActive(false);
+            StartWave();
+        }
+    }
+
+    private void HandleWaveDuration()
+    {
+        if (waveTimeRemaining > 0)
+        {
+            waveTimeRemaining -= Time.deltaTime;
+            UIManager.Instance.waveTimerText.text = "Time Remaining: " + Mathf.CeilToInt(waveTimeRemaining).ToString();
             UIManager.Instance.waveTimerText.gameObject.SetActive(true);
-            int secondsRemaining = Mathf.CeilToInt(timer);
-            UIManager.Instance.waveTimerText.text = "Time Remaining: " + secondsRemaining.ToString();
-            yield return new WaitForSeconds(1f);
-            timer -= 1f;
         }
-    }
-
-    private IEnumerator WaveTimer()
-    {
-        yield return new WaitForSeconds(waveDuration);
-        OnWaveCompleted();
+        else
+        {
+            isWaveActive = false;
+            OnWaveCompleted();
+        }
     }
 
     private void OnWaveCompleted()
@@ -118,37 +136,33 @@ public class WaveManager : GenericMonoSingleton<WaveManager>
         UIManager.Instance.nextWaveText.text = "Next Wave: " + (currentWaveIndex + 1);
         UIManager.Instance.nextWaveText.gameObject.SetActive(true);
 
-        StartCoroutine(HandleWaveCompletion());
+        isWaveCompletePending = true;
+        Invoke(nameof(HandleWaveCompletion), 2f);  // Schedule HandleWaveCompletion to run after 2 seconds
     }
 
-    private IEnumerator HandleWaveCompletion()
+    private void HandleWaveCompletion()
     {
-        yield return new WaitForSeconds(2f);
-
         UIManager.Instance.waveText.gameObject.SetActive(false);
         UIManager.Instance.nextWaveText.gameObject.SetActive(false);
 
         if (currentWaveIndex < waves.Length)
         {
-            StartCoroutine(StartWaveWithCountdown(3));
+            StartWaveWithCountdown(3);
         }
         else
         {
             GameManager.Instance.GameWon();
         }
+
+        isWaveCompletePending = false;
     }
 
     public void ResetWaveManager()
     {
         currentWaveIndex = 0;
-        if (waveTimerCoroutine != null)
-        {
-            StopCoroutine(waveTimerCoroutine);
-        }
-        if (waveDurationCoroutine != null)
-        {
-            StopCoroutine(waveDurationCoroutine);
-        }
+        isWaveActive = false;
+        isCountdownActive = false;
+        isWaveCompletePending = false;
         waveDuration = 10f;
     }
 }
