@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7823476542427450321}
   - component: {fileID: 1618200417276715334}
   - component: {fileID: 7735347188674132787}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ShieldPowerUp
   m_TagString: PowerUp
   m_Icon: {fileID: 0}
@@ -118,3 +118,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3904e71019540964eb240b0c75305db9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  duration: 10

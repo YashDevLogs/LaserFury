@@ -3,8 +3,8 @@ using System.Collections;
 
 public class SlowDownPowerUp : MonoBehaviour, IPowerUps
 {
-    public float duration = 5f; // Duration for the time slowdown
-    public float slowDownFactor = 0.5f; // Factor by which time will be slowed down
+    private float duration = 5f; // Duration for the time slowdown
+    private float slowDownFactor = 0.5f; // Factor by which time will be slowed down
 
     public void ApplyPowerUp(Player player)
     {

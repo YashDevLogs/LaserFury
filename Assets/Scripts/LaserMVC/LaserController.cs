@@ -6,22 +6,18 @@ public class LaserController
     private LaserView laserView;
     private Transform laserSpawn;
 
-    private bool rotatingRight = true;
-    private float currentRotationAngle = 0f;
-
-    public float RotationSpeed { get; private set; }
+    public LaserView LaserView => laserView; // reference needed for these in Game manager and Wave manager
 
     public LaserController(LaserModel model, LaserView view, Transform spawnTransform)
     {
         laserModel = model;
         laserView = view;
         laserSpawn = spawnTransform;
-        RotationSpeed = laserModel.RotationSpeed;
     }
 
     public void UpdateLaser()
     {
-        if (laserView.isLaserActive)
+        if (laserModel.isLaserActive)
         {
             ShootLaser();
         }
@@ -29,53 +25,56 @@ public class LaserController
 
     private void ShootLaser()
     {
-        if (rotatingRight)
+        if (laserModel.RotatingRight)
         {
             float rotationStep = laserModel.RotationSpeed * Time.deltaTime;
             laserSpawn.Rotate(Vector3.up, rotationStep);
-            currentRotationAngle += rotationStep;
+            laserModel.CurrentRotationAngle += rotationStep;
 
-            if (currentRotationAngle >= laserModel.RotationRange)
+            if (laserModel.CurrentRotationAngle >= laserModel.RotationRange)
             {
-                rotatingRight = false;
+                laserModel.RotatingRight = false;
             }
         }
         else
         {
             float rotationStep = laserModel.RotationSpeed * Time.deltaTime;
             laserSpawn.Rotate(Vector3.up, -rotationStep);
-            currentRotationAngle -= rotationStep;
+            laserModel.CurrentRotationAngle -= rotationStep;
 
-            if (currentRotationAngle <= -laserModel.RotationRange)
+            if (laserModel.CurrentRotationAngle <= -laserModel.RotationRange)
             {
-                rotatingRight = true;
+                laserModel.RotatingRight = true;
             }
         }
 
-        // Check for collisions with the laser beam
         RaycastHit hit;
         if (Physics.Raycast(laserSpawn.position, laserSpawn.forward, out hit, laserModel.LaserRange))
         {
             laserView.SetLaserPositions(laserSpawn.position, hit.point);
 
-            // Check if the collision is with an object tagged as "Player"
-            if (hit.collider.CompareTag("Player"))
+            IDamageable damageable = hit.collider.GetComponent<IDamageable>();
+            if (damageable != null && !damageable.HasShield && !damageable.HasLaserProtectionGear)
             {
-                Player player = hit.collider.GetComponent<Player>();
-
-                // Ensure the player is not protected by shields or gear
-                if (player != null && !player.HasShield && !player.HasLaserProtectionGear)
-                {
-                    player.Die();
-                    laserView.StopLaser();
-                }
+                damageable.TakeDamage();
+                StopLaser();
             }
         }
         else
         {
-            // If no collision, extend the laser beam to its maximum range
             laserView.SetLaserPositions(laserSpawn.position, laserSpawn.position + laserSpawn.forward * laserModel.LaserRange);
         }
     }
-}
 
+    public void StartLaser()
+    {
+        laserModel.isLaserActive = true;
+        laserView.EnableLaser(true);
+    }
+
+    public void StopLaser()
+    {
+        laserModel.isLaserActive = false;
+        laserView.EnableLaser(false);
+    }
+}

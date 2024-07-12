@@ -1,21 +1,25 @@
-using Assets.Scripts.Utlities;
 using TMPro;
 using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
-    public TextMeshProUGUI waveText;
-    public TextMeshProUGUI nextWaveText;
-    public TextMeshProUGUI waveTimerText;
-    public TextMeshProUGUI countdownText;
-    public GameObject gameOverScreen;
-    public GameObject gameWonScreen;
+    [SerializeField] private TextMeshProUGUI waveText;
+    [SerializeField] private TextMeshProUGUI nextWaveText;
+    [SerializeField] private TextMeshProUGUI waveTimerText;
+    [SerializeField] private TextMeshProUGUI countdownText;
+    [SerializeField] private GameObject gameOverScreen;
+    [SerializeField] private GameObject gameWonScreen;
 
-    void Start()
+
+    public TextMeshProUGUI WaveText => waveText;
+    public TextMeshProUGUI NextWaveText => nextWaveText;
+    public TextMeshProUGUI WaveTimerText => waveTimerText;
+    public TextMeshProUGUI CountdownText => countdownText;
+    public GameObject GameOverScreen => gameOverScreen;
+    public GameObject GameWonScreen => gameWonScreen;
+
+   public void Start()
     {
-        gameOverScreen.SetActive(false);
-        gameWonScreen.SetActive(false);
-
         waveText.text = "Wave 1";
         waveText.gameObject.SetActive(true);
     }

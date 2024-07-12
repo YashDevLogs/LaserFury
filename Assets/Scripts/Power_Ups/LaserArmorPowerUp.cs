@@ -2,7 +2,7 @@
 
 public class LaserProtectionGearPowerUp : MonoBehaviour, IPowerUps
 {
-    public float duration = 30f;
+    private float duration = 30f;
     private Color[] originalColors;
     private Renderer[] renderers;
 
@@ -36,9 +36,6 @@ public class LaserProtectionGearPowerUp : MonoBehaviour, IPowerUps
         {
             for (int i = 0; i < renderers.Length; i++)
             {
-                if (renderers[i].gameObject.CompareTag("Shield"))
-                    continue;
-
                 renderers[i].material.color = originalColors[i];
             }
         }

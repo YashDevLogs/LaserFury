@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1291791909686570711}
   - component: {fileID: 6852337939339060161}
   - component: {fileID: 6533298668316046978}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SlowDownPowerUp
   m_TagString: PowerUp
   m_Icon: {fileID: 0}
@@ -119,4 +119,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 963aa8f0edea39447b02cad835037a42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  duration: 10
   slowDownFactor: 0.5

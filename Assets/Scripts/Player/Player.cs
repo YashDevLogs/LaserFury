@@ -1,36 +1,30 @@
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IDamageable
 {
-    public GameObject Shield;
-    public bool HasShield { get; set; }
-    public bool HasLaserProtectionGear { get; set; }
+    public GameObject Shield; // A transparent sphere-like GameObject (with no script) which enables when the shield is active.
 
     private bool isPowerUpActive = false;
     private IPowerUps activePowerUp;
     private float powerUpStartTime;
     private float powerUpDuration;
 
-    public void Die()
-    {
-        EventService.PlayerDied();
-    }
+    public bool HasShield { get; set; }
+    public bool HasLaserProtectionGear { get; set; }
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Trigger entered with: " + other.gameObject.name);
-        if (other.gameObject.CompareTag("PowerUp"))
+        // Check if the collided object has an IPowerUps component
+        IPowerUps powerUp = other.GetComponent<IPowerUps>();
+        if (powerUp != null)
         {
-            IPowerUps powerUp = other.gameObject.GetComponent<IPowerUps>();
-            if (powerUp != null)
-            {
-                Destroy(other.gameObject);
-                ApplyPowerUp(powerUp);
-            }
-            else
-            {
-                Debug.LogWarning("No IPowerUps component found on: " + other.gameObject.name);
-            }
+            // Apply & Destroy power-up
+            Destroy(other.gameObject);
+            ApplyPowerUp(powerUp);
+        }
+        else
+        {
+            Debug.LogWarning("No IPowerUps component found on: " + other.gameObject.name);
         }
     }
 
@@ -61,4 +55,10 @@ public class Player : MonoBehaviour
         activePowerUp = null;
         powerUp.RemovePowerUp(this);
     }
+
+    public void TakeDamage()
+    {
+        EventService.PlayerDied();
+    }
+
 }

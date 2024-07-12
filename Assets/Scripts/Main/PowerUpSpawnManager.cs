@@ -1,23 +1,23 @@
-using Assets.Scripts.Utlities;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class PowerUpSpawnManager : MonoBehaviour
+public class PowerUpSpawnManager 
 {
     private float powerUpSpawnInterval = 10f;
-    [SerializeField] private Transform[] powerUpSpawnPoints;
-    [SerializeField] private PowerUpDatabase powerUpDatabase;
+    private Transform[] powerUpSpawnPoints;
+    private PowerUpDatabase powerUpDatabase;
     private PowerUpFactory powerUpFactory;
 
     private float timer;
-/*
-    public PowerUpSpawnManager(Transform[] powerUpSpawnPoints, PowerUpDatabase powerUpDatabase )
+
+    public PowerUpSpawnManager(Transform[] powerUpSpawnPoints, PowerUpDatabase powerUpDatabase)
     {
         this.powerUpDatabase = powerUpDatabase;
         this.powerUpSpawnPoints = powerUpSpawnPoints;
-    }*/
+        
+        Initialise();
+    }
 
-    private void Start()
+    private void Initialise()
     {
         powerUpFactory = new PowerUpFactory(powerUpDatabase);
         timer = powerUpSpawnInterval;
@@ -42,7 +42,7 @@ public class PowerUpSpawnManager : MonoBehaviour
         PowerupTypes randomPowerUp = powerUpTypes[Random.Range(0, powerUpTypes.Length)];
         Transform spawnPoint = powerUpSpawnPoints[Random.Range(0, powerUpSpawnPoints.Length)];
 
-        GameObject powerUp = powerUpFactory.CreatePowerUp(randomPowerUp);
+        GameObject powerUp = powerUpFactory.CreatePowerUp(randomPowerUp); // powerup has to be a GameObject type in order to use "transform" for spwaning powerup at specific location.
         if (powerUp != null)
         {
             powerUp.transform.position = spawnPoint.position;

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6783391859408482702}
   - component: {fileID: -3199910209060652602}
   - component: {fileID: -3736597047323609459}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LaserProtectionGearPowerUp
   m_TagString: PowerUp
   m_Icon: {fileID: 0}
@@ -118,3 +118,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee33efe418cbb8e4a9a44be0b58497e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  duration: 10
